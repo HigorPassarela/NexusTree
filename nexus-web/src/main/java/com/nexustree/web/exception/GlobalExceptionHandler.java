@@ -1,5 +1,9 @@
 package com.nexustree.web.exception;
 
+import com.nexustree.core.exception.CommitNotFoundException;
+import com.nexustree.core.exception.NoChangesDetectedException;
+import com.nexustree.core.exception.UnsupportedPatchOperationException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -29,11 +33,20 @@ public class GlobalExceptionHandler {
         return problemDetail;
     }
 
-    @ExceptionHandler(CorruptedHistoryException.class)
-    public ProblemDetail handleCorruptedHistory(CorruptedHistoryException ex) {
-        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage());
-        problemDetail.setTitle("Corrupted Data History");
-        problemDetail.setType(URI.create("https://nexustree.api/errors/corrupted-history"));
+    @ExceptionHandler(UnsupportedPatchOperationException.class)
+    public ProblemDetail handleUnsupportedPatchOperation(UnsupportedPatchOperationException ex) {
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, ex.getMessage());
+        problemDetail.setTitle("Invalid Patch Operation");
+        problemDetail.setType(URI.create("https://nexustree.api/errors/invalid-patch-operation"));
+        problemDetail.setProperty("timestamp", Instant.now());
+        return problemDetail;
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ProblemDetail handleDataIntegrityViolation(DataIntegrityViolationException ex) {
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.CONFLICT, "Database constraint violation. The resource might already exist or contains invalid relations.");
+        problemDetail.setTitle("Data Integrity Violation");
+        problemDetail.setType(URI.create("https://nexustree.api/errors/data-integrity-violation"));
         problemDetail.setProperty("timestamp", Instant.now());
         return problemDetail;
     }

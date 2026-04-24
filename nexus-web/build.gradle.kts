@@ -14,4 +14,6 @@ dependencies {
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.4.0")
 
     runtimeOnly("com.h2database:h2")
+
+    implementation("org.flywaydb:flyway-core")
 }

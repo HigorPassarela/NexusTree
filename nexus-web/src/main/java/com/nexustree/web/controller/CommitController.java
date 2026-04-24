@@ -1,7 +1,7 @@
 package com.nexustree.web.controller;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.nexustree.web.service.CommitService;
+import com.nexustree.core.service.CommitService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

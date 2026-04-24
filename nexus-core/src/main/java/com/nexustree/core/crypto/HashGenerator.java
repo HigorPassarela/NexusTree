@@ -16,7 +16,7 @@ public class HashGenerator {
             return bytesToHex(encodedHash);
 
         } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException("Critical error: SHA-256 algorithm not found in the JVM.", e);
+            throw new IllegalArgumentException("Critical error: SHA-256 algorithm not found in the JVM.", e);
         }
     }
 
