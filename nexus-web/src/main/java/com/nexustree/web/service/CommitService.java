@@ -11,6 +11,8 @@ import com.nexustree.data.entity.RepositoryEntity;
 import com.nexustree.data.repository.BranchJpaRepository;
 import com.nexustree.data.repository.CommitJpaRepository;
 import com.nexustree.data.repository.RepositoryJpaRepository;
+import com.nexustree.web.exception.CommitNotFoundException;
+import com.nexustree.web.exception.NoChangesDetectedException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -56,7 +58,7 @@ public class CommitService {
             patchDataToSave = differ.generateDiff(currentState, incomingJson);
 
             if (patchDataToSave.isEmpty()) {
-                throw new IllegalArgumentException("No changes detected. Commit rejected.");
+                throw new NoChangesDetectedException("No changes detected in the payload. Commit rejected.");
             }
         }
 
@@ -86,7 +88,7 @@ public class CommitService {
             final String hashToSearch = currentHash;
 
             CommitEntity commit = commitRepository.findById(hashToSearch)
-                    .orElseThrow(() -> new RuntimeException("Commit corrupted: " + hashToSearch));
+                    .orElseThrow(() -> new CommitNotFoundException(hashToSearch));
 
             history.add(commit);
             currentHash = commit.getParentHash();
