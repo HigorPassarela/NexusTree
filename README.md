@@ -6,6 +6,8 @@
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-336791?style=for-the-badge&logo=postgresql)
 ![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?style=for-the-badge&logo=docker)
 
+> 🖥️ **Interface Gráfica Disponível:** Este é o repositório do **Backend (Motor Core)**. Para visualizar e interagir com os dados através de um Dashboard moderno, acesse o repositório do Front-end: **[NexusTree Explorer](https://github.com/HigorPassarela/nexustree-explorer)**.
+
 O NexusTree é uma API REST de alta performance que atua como um **"Git para Dados Estruturados"**. 
 
 Em vez de sobrescrever dados em um banco de dados (`UPDATE table SET...`), o NexusTree rastreia as mudanças ao longo do tempo calculando a diferença matemática (*Diff*) entre os payloads JSON, gerando hashes criptográficos SHA-256 e armazenando apenas os deltas (JSON Patches). Isso permite que os usuários façam uma "viagem no tempo" e reconstruam o estado exato de um documento em qualquer ponto da história.
@@ -65,9 +67,9 @@ gradlew.bat :nexus-web:bootRun
 ```
 *O Flyway criará automaticamente as tabelas necessárias no banco de dados durante a inicialização.*
 
-### Passo 3: Acessar a Documentação da API
-Navegue até o Swagger UI no seu navegador para interagir com a API:
-👉 **[http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)**
+### Passo 3: Acessar a API ou o Dashboard
+*   **Documentação Swagger:** Navegue até 👉 **[http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)**
+*   **Dashboard Visual:** Siga as instruções no repositório do **[NexusTree Explorer](https://github.com/HigorPassarela/nexustree-explorer)** para subir a interface React.
 
 ---
 
