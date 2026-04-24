@@ -39,6 +39,6 @@ public class CommitEntity {
     private Instant timestamp;
 
     @JdbcTypeCode(SqlTypes.JSON)
-    @Column(name = "patch_data", columnDefinition = "jsonb")
+    @Column(name = "patch_data")
     private JsonNode patchData;
 }
