@@ -30,7 +30,7 @@ public class JsonPatcher {
                         break;
 
                     default:
-                        throw new IllegalArgumentException("Unknown patch operation: " + op);
+                        throw new UnsupportedOperationException(op);
                 }
             }
         }
